@@ -16,6 +16,7 @@ public class ChromeRunner {
     public void openUrl(){
         driver.manage().window().maximize();
         driver.get("https://my.cloud9.ge/login");
+
     }
 
     @AfterTest (description = "Chrome ბრაუზერის დახურვა.")

@@ -10,7 +10,8 @@ public interface LoginData {
             validPasswordData = "Nn@123456",
              emptyEmailData = " ",
              emptyPasswordData = " ",
-             unregisteredCorrectEmail = "nan@gmail.com";
+             unregisteredCorrectEmail = "nan@gmail.com",
+            validEmailforsubscription = "nanka.tughushi@gmail.com";
 
 
 }

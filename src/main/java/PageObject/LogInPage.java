@@ -10,12 +10,9 @@ public class LogInPage {
          emailField = By.name("username"),
          passwordField = By.id("inputPassword"),
             logInButton = By.id("login"),
-    portaliButton = By.xpath("//div[@class=']"),
-           googleButton= By.id("button-label");
 
+           secondEmailField = By.name("email"),
+           subscribeButton = By.id("submitsubscribe");
 
-         //emailField = By.name("email"),
-          //passwordField = By.id("pass"),
-          //logInButton = By.name("login");
 
 }

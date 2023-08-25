@@ -1,13 +1,18 @@
+import DataObject.LoginData;
 import StepObject.LoginSteps;
 import Utils.ChromeRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -26,8 +31,14 @@ public class LogIn extends ChromeRunner {
         step1.emailinput(invalidEmailData);
         step1.passwordinput(invalidPasswordData);
         step1.loginButton();
-       Thread.sleep(5000);
 
+        String actualTitle = driver.getTitle();
+        String expectedTitle = "შესვლა - CLOUD9.GE";
+       Assert.assertEquals(actualTitle, expectedTitle);
+
+
+
+      Thread.sleep(500);
     }
 
     @Test (priority = 2)
@@ -43,6 +54,7 @@ public class LogIn extends ChromeRunner {
         step2.emailinput(validEmailData);
         step2.passwordinput(invalidPasswordData);
         step2.loginButton();
+
 
         Thread.sleep(5000);
 
@@ -60,6 +72,7 @@ public class LogIn extends ChromeRunner {
         step3.passwordinput(validPasswordData);
         step3.loginButton();
 
+
         Thread.sleep(5000);
     }
 
@@ -75,8 +88,10 @@ public class LogIn extends ChromeRunner {
         step4.passwordinput(validPasswordData);
         step4.loginButton();
 
+
         Thread.sleep(5000);
     }
+
     @Test (priority = 5)
     @Description ("დალოგინების მცდელობა, როდესაც გვიწერია მხოლოდ მეილი და პაროლის ველი ცარიელია.")
     @Severity(SeverityLevel.BLOCKER)
@@ -88,6 +103,8 @@ public class LogIn extends ChromeRunner {
         step5.emailinput(validEmailData);
         step5.passwordinput(emptyPasswordData);
         step5.loginButton();
+
+
 
         Thread.sleep(5000);
     }
@@ -134,9 +151,36 @@ public class LogIn extends ChromeRunner {
         step8.passwordinput(invalidPasswordData);
         step8.loginButton();
 
+
+
+                Thread.sleep(5000);
+    }
+
+
+    @Test (priority = 9)
+    @Description ("მეილის გამოწერის მცდელობა")
+    @Severity(SeverityLevel.MINOR)
+
+
+    public void subscribe() throws InterruptedException {
+
+
+        LoginSteps step9 = new LoginSteps(driver);
+
+        //step9.secondEmailInput(validEmailforsubscription);
+        //step9.subscribeButton();
+
+         By secondEmailField  = By.name("email");
+         By validEmailforsubscription = By.linkText("nanka.tughushi@gmail.com");
+         driver.findElement(secondEmailField).sendKeys("nanka.tughushi@gmail.com");
+         By subscribeButton = By.id("submitsubscribe");
+         driver.findElement(subscribeButton).click();
+         WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(subscribeButton)).click();
+
         Thread.sleep(5000);
     }
-    @Test (priority = 9)
+    @Test (priority = 10)
     @Description ("დალოგიების მცდელობა, სწორი მეილის და პაროლის ჩაწერის დროს.")
     @Severity(SeverityLevel.BLOCKER)
 
@@ -144,39 +188,20 @@ public class LogIn extends ChromeRunner {
     public void logInWithValidData() throws InterruptedException {
 
 
-        LoginSteps step9 = new LoginSteps(driver);
+        LoginSteps step10 = new LoginSteps(driver);
 
-        step9.emailinput(validEmailData);
-        step9.passwordinput(validPasswordData);
-        step9.loginButton();
+        step10.emailinput(validEmailData);
+
+        By emailField = By.id("inputEmail");
+        String actualResult = driver.findElement(emailField).getAttribute("value");
+        Assert.assertEquals(actualResult, validEmailData);
+
+        step10.passwordinput(validPasswordData);
+        step10.loginButton();
 
 
         Thread.sleep(5000);
     }
 
-   // public void portaliB() throws InterruptedException {
-
-
-        //LoginSteps step10 = new LoginSteps(driver);
-
-        //Select selectOption = new Select(driver.findElement(portaliB());
-
-
-        //Thread.sleep(5000);
-
-    //}
-
-
-
-
-  @Test (priority = 10)
-
-   public void gButton() throws InterruptedException {
-       LoginSteps step10 = new LoginSteps(driver);
-
-
-        step10.gButton();
-
-      Thread.sleep(5000);
     }
-}
+
